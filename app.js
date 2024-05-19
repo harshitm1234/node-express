@@ -44,10 +44,10 @@ app.post("/contact-us", async (req, res) => {
   try {
     const obj = req.body;
     const html = `<div>
-        <p>${obj.firstName}</p>
-        <p>${obj.lastName}</p>
-        <p>${obj.email}</p>
-        <p>${obj.contact}</p>
+        <p>firstName: ${obj.firstName}</p>
+        <p>lastName: ${obj.lastName}</p>
+        <p>email: ${obj.email}</p>
+        <p>contact: ${obj.contact}</p>
       </div>`;
     const info = await client.send({
       from: sender,
