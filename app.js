@@ -40,7 +40,6 @@ app.get("/", async (req, res) => {
   res.send("Welcome");
 });
 app.post("/contact-us", async (req, res) => {
-  console.log(req.body);
   try {
     const obj = req.body;
     const html = `<div>
@@ -52,18 +51,14 @@ app.post("/contact-us", async (req, res) => {
     const info = await client.send({
       from: sender,
       to: recipients,
-      subject: "You are awesome!",
-      text: "Congrats for sending test email with Mailtrap!",
-      category: "Integration Test",
+      subject: "User Query",
+      text: "Below are the details for the contacted user",
       html: html,
     });
-    console.log(info);
-    console.log(html);
-
-    res.send("Hello World!");
+    res.send({ status: "Success", data: obj });
   } catch {
-    console.log("error");
-    res.send("Error");
+    res.statusCode = 500;
+    res.send({ status: "Error" });
   }
 });
 app.listen(PORT, () => console.log(`Server Started at PORT:${PORT}`));
